@@ -105,39 +105,5 @@ namespace Freshmvvm.PageModels
                 Contacts.Add(contact);
             }
         }
-
-        /// <summary>
-        /// Uses the SQLite Async capability to insert sample data on multiple threads.
-        /// </summary>
-        private void CreateSampleData()
-        {
-            var contact1 = new Contact
-            {
-                Name = "Jake Smith",
-                Email = "jake.smith@mailmail.com"
-            };
-
-            var contact2 = new Contact
-            {
-                Name = "Jane Smith",
-                Email = "jane.smith@mailmail.com"
-            };
-
-            var contact3 = new Contact
-            {
-                Name = "Jim Bob",
-                Email = "jim.bob@mailmail.com"
-            };
-
-            var task1 = _repository.CreateContact(contact1);
-            var task2 = _repository.CreateContact(contact2);
-            var task3 = _repository.CreateContact(contact3);
-
-            // Don't proceed until all the async inserts are complete.
-            var allTasks = Task.WhenAll(task1, task2, task3);
-            allTasks.Wait();
-
-            LoadContacts();
-        }
     }
 }
